@@ -111,16 +111,16 @@ contract FractionalNFTMarketplace {
             }));
         }
 
-        // if (fractionalNFT.totalSold == fractionalNFT.totalFractions) {
-        //     ERC721 nft = ERC721(fractionalNFT.nftContract);
+        if (fractionalNFT.totalSold == fractionalNFT.totalFractions) {
+            ERC721 nft = ERC721(fractionalNFT.nftContract);
 
-        //     for (uint256 i = 0; i < fractionalNFT.totalFractions; i++) {
-        //         FractionalNFTBuyer memory fractionalNFTBuyer = _fractionalNFTBuyers[fractionId][i];
-        //         nft.safeTransferFrom(address(this), fractionalNFTBuyer.buyer, fractionalNFT.tokenId);
-        //     }
+            for (uint256 i = 0; i < fractionalNFT.totalFractions; i++) {
+                FractionalNFTBuyer memory fractionalNFTBuyer = _fractionalNFTBuyers[fractionId][i];
+                nft.safeTransferFrom(address(this), fractionalNFTBuyer.buyer, fractionalNFT.tokenId);
+            }
 
-        //     fractionalNFT.owner.transfer(address(this).balance);
-        // }
+            fractionalNFT.owner.transfer(address(this).balance);
+        }
 
         
 
