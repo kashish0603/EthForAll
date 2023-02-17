@@ -22,13 +22,21 @@ contract Bond_minter {
 
 contract Bond_NFT is ERC721, ERC721Enumerable, Ownable {
     
+    uint256 public _interest;
+    string public _description;
+    uint256 _time_period;
+
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIdCounter;
 
-    constructor(string memory company, string memory symbl) ERC721(company, symbl) {}
+    constructor(string memory company, string memory symbl, uint256 interest, string memory description, uint256 time_period ) ERC721(company, symbl) {
+        _interest = interest;
+        _description = description;
+        _time_period = time_periodl;
+    }
 
-    function safeMint(address to) public onlyOwner {
+    function safeMint(address to) public onlyOwner {    
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
