@@ -1,12 +1,26 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "./payment.sol";
+import "./MyToken.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Counters.sol";
 
-contract FractionalNFTMarketplace {
+
+contract fracplace is ERC721, IERC20, payment, MyToken {
+    address payable public owner;
+    mapping(uint256 => uint256) public prices;
+    mapping(address => mapping(uint256 => uint256)) public balances;
+
+    AggregatorV3Interface internal priceFeed;
+
+    constructor() {
+        owner = payable(msg.sender);
+        priceFeed = AggregatorV3Interface(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419); // Ethereum/USD price feed on mainnet
+    }
+
     using SafeMath for uint256;
     using Counters for Counters.Counter;
 
@@ -32,6 +46,7 @@ contract FractionalNFTMarketplace {
     }
 
     mapping (uint256 => FractionalNFTBuyer[]) private _fractionalNFTBuyers;
+    mapping (uint256 => address) public fractionalTokenAddresses;
 
     event FractionalNFTCreated(
         uint256 indexed fractionId,
@@ -87,7 +102,22 @@ contract FractionalNFTMarketplace {
         );
     }
 
-    function buyFractionalNFT(uint256 fractionId, uint256 fractionAmount) public {
+    function generateFractionalTokenAddress(uint256 fractionalId) internal returns (address) {
+        bytes32 hash = keccak256(abi.encodePacked(fractionalId, address(this), block.timestamp));
+        address tokenAddress = address(uint160(uint256(hash)));
+        fractionalTokenAddresses[fractionalId] = tokenAddress;
+        return tokenAddress;
+    }
+
+
+    // function transferTokenOwnership(uint256 tId, address buyer, uint256 amount) internal {
+    //     IERC20 token = IERC20(fracaddress);
+    //     // address seller = ownerOf(tokenAddress);
+    //     require(token.allowance(ownerof(fracaddress), address(this)) >= amount, "Marketplace does not have enough allowance");
+    //     require(token.transferFrom(ownerof(fracaddress), buyer, amount), "Transfer failed");
+    // }
+
+    function buyFractionalNFT(uint256 fractionId, uint256 fractionAmount, uint256 tokenId, uint256 amount) public payable {
         FractionalNFT storage fractionalNFT = _fractionalNFTs[fractionId];
         require(fractionalNFT.fractionId > 0, "Fractional NFT does not exist");
         require(fractionAmount > 0, "Fraction amount must be greater than 0");
@@ -103,7 +133,8 @@ contract FractionalNFTMarketplace {
         for (uint256 i = 0; i < fractionAmount; i++) {
             _fractionIds.increment();
             uint256 newFractionId = _fractionIds.current();
-
+            uint256 tId = exchangeTokens(newFractionId);
+            safeTransferFrom(address(this), msg.sender, tId);
             _fractionalNFTBuyers[fractionId].push(FractionalNFTBuyer({
                 fractionId: newFractionId,
                 fractionAmount: 1,
@@ -111,18 +142,17 @@ contract FractionalNFTMarketplace {
             }));
         }
 
-        if (fractionalNFT.totalSold == fractionalNFT.totalFractions) {
-            ERC721 nft = ERC721(fractionalNFT.nftContract);
+        require(msg.value == prices[tokenId] * amount, "Incorrect amount of ether sent");
+        uint256 totalPrice1 = msg.value;
 
-            for (uint256 i = 0; i < fractionalNFT.totalFractions; i++) {
-                FractionalNFTBuyer memory fractionalNFTBuyer = _fractionalNFTBuyers[fractionId][i];
-                nft.safeTransferFrom(address(this), fractionalNFTBuyer.buyer, fractionalNFT.tokenId);
-            }
+        (, int256 price, , , ) = priceFeed.latestRoundData();
+        uint256 etherPrice = uint256(price) * 1e10; // Convert the price to wei
+        uint256 usdPrice = etherPrice / 1e8; // Convert the price to USD
+        uint256 usdTotalPrice = totalPrice / 1e18 * usdPrice; // Convert the total price to USD
 
-            fractionalNFT.owner.transfer(address(this).balance);
-        }
-
-        
+        // Transfer the money to the owner of the fractional NFT
+        balances[owner][tokenId] += amount;
+        payable(owner).transfer(usdTotalPrice);    
 
         emit FractionalNFTBought(fractionId, fractionalNFT.tokenId, msg.sender, fractionAmount);
 
@@ -135,7 +165,7 @@ contract FractionalNFTMarketplace {
         uint256 pricePerFraction,
         uint256 totalFractions,
         uint256 totalSold,
-        address owner
+        address owner1
     ) {
         FractionalNFT storage fractionalNFT = _fractionalNFTs[fractionId];
         require(fractionalNFT.fractionId > 0, "Fractional NFT does not exist");
