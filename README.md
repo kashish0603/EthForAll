@@ -7,7 +7,16 @@ We at Bondchain would then mint a nft-bond for that company and fractionalize it
 After all the fractionalized bond-nfts are sold out, people can then trade them amongst each other and will also receive the interest that is set by the company on a periodic basis
 
 ## Built With:
-- React, Hardhat, npm, solidity, Truffle, Javascript, Quicknode, Ethers.js, web3.js, 
+- React
+- Hardhat
+- npm
+- solidity
+- Truffle
+- Javascript
+- Quicknode
+- Ethers.js
+- web3.js
+- chainlink
 
 ## Contributing
 
