@@ -1,0 +1,297 @@
+* {
+	font-family: "Lato", sans-serif;
+	line-height: 1.5;
+	padding: 0;
+	margin: 0;
+}
+
+.container {
+	width: 90%;
+	margin: 0 auto 0 auto;
+	overflow: hidden;
+}
+
+.header {
+	background-color: #30e3ca;
+	margin-bottom: 50px;
+	min-height: 60px;
+	width: 100%;
+	/* position: fixed; */
+	z-index: 9;
+}
+
+.header div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+nav ul {
+	display: flex;
+	gap: 50px;
+}
+
+.header ul,
+footer ul {
+	list-style-type: none;
+}
+
+.header a {
+	text-decoration: none;
+	color: black;
+}
+
+nav a:hover {
+	color: blue;
+	font-weight: bold;
+}
+
+footer {
+	background: #180a0a;
+	color: #30e3ca;
+}
+
+footer div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+footer a {
+	text-decoration: none;
+	color: #30e3ca;
+}
+
+.socials img {
+	background: #30e3ca;
+	border-radius: 50%;
+	margin: 0 10px;
+}
+
+.home {
+	padding-top: 180px;
+	background: linear-gradient(to bottom, #30e3cbbe, #fff);
+}
+
+.home h1,
+#vets h1,
+.faq h1,
+.about h1,
+.home-faq h1,
+#vaccination h1,
+.adopt h1,
+#fun-time h1 {
+	font-size: 35px;
+	text-align: center;
+	margin-bottom: 0;
+}
+
+.home h4,
+#vets p,
+.faq p,
+.about-p,
+.home-faq h4,
+#vaccination p,
+.adopt p,
+#fun-time p {
+	font-size: 18px;
+	font-weight: lighter;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 50px;
+}
+
+.img-home {
+	margin-left: 220px;
+}
+
+#vets {
+	margin-top: -100px;
+	padding-top: 100px;
+}
+
+/*************About us *********/
+
+.founders div {
+	width: 70%;
+	background-color: #e4f9f5;
+	padding: 20px;
+}
+
+.rupam,
+.akshit,
+.mohmika {
+	float: left;
+	margin-right: 75px;
+	margin-bottom: 75px;
+}
+
+.arjun,
+.anshul,
+.dhananjay {
+	float: right;
+	margin-bottom: 75px;
+}
+
+.rupam h3,
+.arjun h3,
+.akshit h3,
+.mohmika h3,
+.dhananjay h3 {
+	margin: 0;
+	padding: 0;
+}
+
+.founders img {
+	border-radius: 100px;
+}
+
+.our-vision {
+	border-left: 5px #fce38a solid;
+	padding-left: 50px;
+	margin: 75px 0;
+}
+
+/************** Nearby Vets *************/
+
+.home-faq ul {
+	list-style-type: none;
+}
+
+.heading {
+	margin-bottom: 30px;
+}
+
+.card {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	margin: 30px 0px;
+	color: #333;
+	width: 250px;
+	height: 100%;
+}
+
+.products {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	align-items: center;
+	justify-content: center;
+}
+
+.products-home {
+	display: grid;
+	grid-template-columns: 3fr 3fr 3fr 1fr;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.products a,
+.products-home a,
+#fun-time a {
+	text-decoration: none;
+	color: #333;
+	transition: transform 0.2s ease-in;
+}
+
+.products a:hover,
+.products-home a:hover,
+#fun-time a:hover {
+	transform: scale(1.03);
+}
+
+#fun-time a {
+	text-align: center;
+}
+
+.img {
+	margin: 0 20px;
+}
+
+.heading h3 {
+	color: grey;
+	margin: 0;
+	padding: 0;
+}
+
+.heading h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 35px;
+}
+
+.products h3,
+.products-home h3 {
+	margin-bottom: 0;
+	color: #11999e;
+}
+
+.products h4,
+.products-home h4 {
+	margin-top: 7px;
+	margin-bottom: 15px;
+}
+
+.products h5,
+.products-home h5 {
+	margin-top: 0;
+}
+
+.more {
+	margin-left: 20px;
+}
+
+.more h2 {
+	color: #11999e;
+	font-size: 50px;
+}
+
+#fun-time h2 {
+	color: #11999e;
+}
+
+/***************** FAQS *************/
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+.btn {
+	display: inline-block;
+	padding: 10px 15px;
+	color: #fff;
+	border: none;
+	border-radius: 7px;
+	background: #11999e;
+}
+
+.btn:hover {
+	transform: scale(0.97);
+}
+
+.btn h3 {
+	margin: 0;
+	padding: 0;
+	font-weight: lighter;
+}
+
+#vaccination a {
+	text-decoration: none;
+}
+
+.inline {
+	display: inline;
+	margin-right: 30px;
+	font-size: 18px;
+	font-weight: lighter;
+}
+
+.schedule {
+	margin-top: 50px;
+	text-align: center;
+}

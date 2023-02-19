@@ -1,0 +1,11 @@
+@media (max-width: 900px) {
+	.header div {
+		flex-direction: column;
+		margin-bottom: 20px;
+	}
+
+	nav ul {
+		flex-direction: column;
+		gap: 10px;
+	}
+}
