@@ -4,3 +4,8 @@ A decentralized bond market where companies could issue bonds for the purpose of
 We at Bondchain would then mint a nft-bond for that company and fractionalize it required amount which would then be sold induvidually to investors who are willing to buy the bond. 
 
 After all the fractionalized bond-nfts are sold out, people can then trade them amongst each other and will also receive the interest that is set by the company on a periodic basis
+
+React App was worked on different repo and compiled finally on the current one. 
+Repo link: https://github.com/arjun-sir/eth-for-all
+
+Website link: https://bond-chain.netlify.app/
