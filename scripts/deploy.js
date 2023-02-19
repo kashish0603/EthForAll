@@ -4,7 +4,7 @@ const compiledNFTMinter = require("../artifacts/contracts/Bond.sol/Bond_minter.j
 
 
 const provider = new HDWalletProvider(
-  'false reduce faith sleep mask bullet common bulb glimpse alcohol void cluster',
+  env.process.YOUR_MNEMONIC,
   'https://boldest-bitter-bird.ethereum-goerli.discover.quiknode.pro/1c25dad2589f635c843879a1a672b84fc3626628/' );
 
 const web3 = new Web3(provider);
