@@ -1,13 +1,6 @@
-# Sample Hardhat Project
+Presenting you BondChain !!
+A decentralized bond market where companies could issue bonds for the purpose of monetory funds. 
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+We at Bondchain would then mint a nft-bond for that company and fractionalize it required amount which would then be sold induvidually to investors who are willing to buy the bond. 
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+After all the fractionalized bond-nfts are sold out, people can then trade them amongst each other and will also receive the interest that is set by the company on a periodic basis
